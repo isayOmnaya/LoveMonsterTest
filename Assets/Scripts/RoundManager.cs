@@ -7,8 +7,8 @@ using System.IO;
 public class RoundData
 {
     public int CurrentRound;
-    public float RoundDuration;
     public int MonstersSpawned;
+    public string RoundDuration;
 }
 
 [System.Serializable]
@@ -147,10 +147,12 @@ public class RoundManager : MonoBehaviour
     {
         // Ensure that _saveFileName is defined somewhere in your class
         string saveFilePath = Path.Combine(Application.persistentDataPath, _savePath);
+        int minutes = Mathf.FloorToInt(_roundDuration / 60F);
+        int seconds = Mathf.FloorToInt(_roundDuration % 60F);
 
         RoundData roundData = new RoundData
         {
-            RoundDuration = _roundDuration,
+            RoundDuration = $"{minutes:00}:{seconds:00}",
             MonstersSpawned = _currentRoundValue,  // Assuming this is the method that returns the total monsters spawned
             CurrentRound = _currentRound
         };
