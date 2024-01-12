@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Monster : MonoBehaviour
@@ -11,16 +10,19 @@ public class Monster : MonoBehaviour
     [SerializeField]
     float _minVelocity = 0.0f;
     
-    float _velocity;
+    float _targetSpeed;
 
     [SerializeField]
     float _timeToDestroy = 0.0f;
+
+    float _initialTimeToDestroy = 0f;
 
     float _elapsedTime = 0.0f;
     
     public void Initialize()
     {
-        _velocity = Random.Range(_minVelocity, _maxVelocity);
+        _targetSpeed = Random.Range(_minVelocity, _maxVelocity);
+        _initialTimeToDestroy = _timeToDestroy;
     }
 
     public void UpdateExternal()
@@ -31,7 +33,7 @@ public class Monster : MonoBehaviour
 
     void Move()
     {
-        transform.Translate(Vector2.right * _velocity * Time.deltaTime);
+        transform.Translate(Vector2.right * _targetSpeed * Time.deltaTime);
     }
 
     void CheckOutOfBounds()
@@ -45,6 +47,10 @@ public class Monster : MonoBehaviour
                 gameObject.SetActive(false);
                 _elapsedTime = 0f;
             }
+        }
+        else
+        {
+            _timeToDestroy = _initialTimeToDestroy;
         }
     }
 

@@ -17,14 +17,13 @@ public class MonsterController : MonoBehaviour
     [SerializeField]
     MonsterObjectPool _monsterObjectPool = null;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         _monsterManager.Initialize(_monsterObjectPool);
         _roundManager.Initialize();
     }
 
-    // Update is called once per frame
     void Update()
     {
         _monsterManager.UpdateExternal();

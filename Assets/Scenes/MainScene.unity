@@ -1353,7 +1353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15280054b0eaff9448ca8ec804c24a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeMonsters: []
+  _activeMonsters: []
   _cameraSettings: {fileID: 519420033}
   _roundManager: {fileID: 1080040636}
   _spawnPoint: {fileID: 152963769}
@@ -2343,7 +2343,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1787958c4b50ddf4096d7815c93bcb85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterPrefab: {fileID: 2242707897295110459, guid: 346a434d8f494374e97d0ee5543e1b1b, type: 3}
+  _monsterPrefab: {fileID: 2242707897295110459, guid: 346a434d8f494374e97d0ee5543e1b1b, type: 3}
+  _threadHold: 10000
 --- !u!4 &1612373112
 Transform:
   m_ObjectHideFlags: 0

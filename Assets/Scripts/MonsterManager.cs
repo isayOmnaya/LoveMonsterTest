@@ -1,4 +1,4 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ public class MonsterManager : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField]
-    List<Monster> activeMonsters = new List<Monster>();
+    List<Monster> _activeMonsters = new List<Monster>();
 
     [SerializeField]
     CameraSettings _cameraSettings = null;
@@ -23,41 +23,42 @@ public class MonsterManager : MonoBehaviour
     MonsterObjectPool _monsterPool = null;
 
     [Header("Data")]
-    int _monsterCount = 0;
+    int _totalNumberOfMonstersCount = 0;
 
 
 
     public void Initialize(MonsterObjectPool monsterObjectPool)
     {
         _monsterPool = monsterObjectPool;
-        _cameraSettings.InitializeSpawnPoint(_spawnPoint); // can call in updateExternal too
     }
 
+    //going with a topdown setup where i call updateExternal in the update of a GameAuthority script;
+    //idea is to have a single monobehavior that calls Starts, Update etc
     public void UpdateExternal()
     {
-        UpdateExternal(_monsterPool, _roundManager);
-        _guiManager.UpdateMonsterCount(_monsterCount);
-        _cameraSettings.InitializeSpawnPoint(_spawnPoint);
+        UpdateActiveMonsters(_monsterPool, _roundManager);
+        _guiManager.UpdateMonsterCount(_totalNumberOfMonstersCount);
+        _cameraSettings.UpdateCameraSpawnPoints(_spawnPoint);
     }
 
-    void UpdateExternal(MonsterObjectPool monsterPool, RoundManager roundManager)
+    void UpdateActiveMonsters(MonsterObjectPool monsterPool, RoundManager roundManager)
     {
-        for(int i = 0; i < activeMonsters.Count; i++)
+        for(int i = _activeMonsters.Count - 1; i >= 0; i--)
         {
-            if(activeMonsters[i].gameObject.activeSelf)
+            if(_activeMonsters[i].gameObject.activeSelf)
             {
-                activeMonsters[i].UpdateExternal();
+                _activeMonsters[i].UpdateExternal();
             }
             else
             {
-                monsterPool.ReturnToPool(activeMonsters[i].gameObject);
-                activeMonsters.RemoveAt(i);
-                i--;
+                monsterPool.ReturnToPool(_activeMonsters[i].gameObject);
+                _activeMonsters.RemoveAt(i);
             }
         }
 
+       
         // Check if all monsters have left the screen
-        if(activeMonsters.Count == 0)
+        if(_activeMonsters.Count == 0)
         {
             roundManager.DelayBeforeSpawn(this, _spawnPoint);
         }
@@ -65,17 +66,17 @@ public class MonsterManager : MonoBehaviour
 
     public bool CheckMonsterInScreen()
     {
-       return activeMonsters.Count == 0;
+       return _activeMonsters.Count == 0;
     }
 
     public void AddMonster(Monster monster)
     {
-        activeMonsters.Add(monster);
-        _monsterCount++;
+        _activeMonsters.Add(monster);
+        _totalNumberOfMonstersCount++;
     }
 
     public int GetMonsterCount()
     {
-        return _monsterCount;
+        return _totalNumberOfMonstersCount;
     }
 }

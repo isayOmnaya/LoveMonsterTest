@@ -5,11 +5,14 @@ using UnityEngine;
 public class MonsterObjectPool : MonoBehaviour
 {
     [Header("Components")]
-    public GameObject MonsterPrefab;
+    [SerializeField]
+    GameObject _monsterPrefab;
 
     List<GameObject> _monsterList = new List<GameObject>();
-    bool _notEnoughMonsterInPool = true;
 
+    [Header("Data")]
+    [SerializeField]
+    int _threadHold = 0;
 
     public GameObject GetMonsterFromPool()
     {
@@ -23,9 +26,10 @@ public class MonsterObjectPool : MonoBehaviour
                 }
             }
         }
-        if(_notEnoughMonsterInPool)
+
+        if (_monsterList.Count < _threadHold)
         {
-            GameObject monster = Instantiate(MonsterPrefab, transform);
+            GameObject monster = Instantiate(_monsterPrefab, transform);
             monster.SetActive(false);
             _monsterList.Add(monster);
             return monster;
@@ -43,5 +47,11 @@ public class MonsterObjectPool : MonoBehaviour
         {
             Debug.LogWarning("Trying to return a monster to the pool that doesn't belong to this pool.");
         }
+    }
+
+    public GameObject GetMonsterPrefab
+    {
+        get {return _monsterPrefab;}
+        set {_monsterPrefab = value;}
     }
 }

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class CameraSettings : MonoBehaviour
@@ -8,7 +7,7 @@ public class CameraSettings : MonoBehaviour
     [SerializeField]
     float _spawnPointOffset = 0.0f;
     
-    public void InitializeSpawnPoint(Transform spawnPoint)
+    public void UpdateCameraSpawnPoints(Transform spawnPoint)
     {
         if(spawnPoint != null)
         {
@@ -21,14 +20,6 @@ public class CameraSettings : MonoBehaviour
 
                 spawnPoint.position = new Vector3(leftBound, spawnPoint.position.y, spawnPoint.position.z);
             }
-            else
-            {
-                Debug.LogError("Main camera not found.");
-            }
-        }
-        else
-        {
-            Debug.LogError("Spawn point not assigned.");
         }
     }
 }

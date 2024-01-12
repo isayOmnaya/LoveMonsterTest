@@ -1,4 +1,4 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
@@ -32,7 +32,7 @@ public class RoundManager : MonoBehaviour
     [SerializeField]
     float _delayBeforeNextRound = 2f;
     
-    float _InitialDelayBeforeRound = 0.0f;
+    float _initialDelayBeforeRound = 0.0f;
 
     [SerializeField]
     float _roundDuration = 0.0f;
@@ -53,7 +53,7 @@ public class RoundManager : MonoBehaviour
 
     public void Initialize()
     {
-        _InitialDelayBeforeRound = _delayBeforeNextRound;
+        _initialDelayBeforeRound = _delayBeforeNextRound;
         _guiManager.UpdateRound(_currentRound);
     }
 
@@ -79,6 +79,7 @@ public class RoundManager : MonoBehaviour
             _roundDuration = 0;
         }
     }
+
     public void StartNextRound(MonsterManager monsterManager, Transform spawnPoint)
     {
         if(_currentRound == 0)
@@ -103,7 +104,7 @@ public class RoundManager : MonoBehaviour
             _startCounter = true;
             StartNextRound(monsterManager, spawnPoint);
             
-            _delayBeforeNextRound = _InitialDelayBeforeRound;
+            _delayBeforeNextRound = _initialDelayBeforeRound;
         }
         else
         {
