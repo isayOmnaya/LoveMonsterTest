@@ -5,8 +5,7 @@ using UnityEngine;
 public class MonsterObjectPool : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField]
-    GameObject _monsterPrefab;
+    public GameObject MonsterPrefab;
 
     List<GameObject> _monsterList = new List<GameObject>();
     bool _notEnoughMonsterInPool = true;
@@ -27,7 +26,7 @@ public class MonsterObjectPool : MonoBehaviour
         if(_notEnoughMonsterInPool)
         {
             //trippleSpread or normal bullet
-            GameObject monster = Instantiate(_monsterPrefab, transform);
+            GameObject monster = Instantiate(MonsterPrefab, transform);
             monster.SetActive(false);
             _monsterList.Add(monster);
             return monster;
@@ -37,7 +36,7 @@ public class MonsterObjectPool : MonoBehaviour
 
     public void ReturnToPool(GameObject monster)
     {
-        if (_monsterList.Contains(monster))
+        if(_monsterList.Contains(monster))
         {
             monster.SetActive(false);
         }
@@ -46,5 +45,4 @@ public class MonsterObjectPool : MonoBehaviour
             Debug.LogWarning("Trying to return a monster to the pool that doesn't belong to this pool.");
         }
     }
-
 }

@@ -34,7 +34,6 @@ public class MonsterController : MonoBehaviour
     #if UNITY_EDITOR
         if(!EditorApplication.isPlayingOrWillChangePlaymode)
         {
-     
             _roundManager.DeleteSaveFile(); // Temporary Delete when you quit From Inspector
         }
 #endif

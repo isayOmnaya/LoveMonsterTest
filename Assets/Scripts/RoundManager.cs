@@ -26,6 +26,8 @@ public class RoundManager : MonoBehaviour
     [SerializeField]
     GuiManager _guiManager = null;
 
+    
+
     [Header("Round Settings")]
     [SerializeField]
     float _delayBeforeNextRound = 2f;
@@ -115,14 +117,14 @@ public class RoundManager : MonoBehaviour
         _currentRoundValue = 1;
     }
 
-    void CalculateNextFibonacciValue()
+    public void CalculateNextFibonacciValue()
     {
         int nextRoundValue = _previousRoundValue + _currentRoundValue;
         _previousRoundValue = _currentRoundValue;
         _currentRoundValue = nextRoundValue;
     }
 
-    void SpawnMonstersRecursively(int remainingCount, MonsterManager monsterManager, Transform spawnPoint)
+    public void SpawnMonstersRecursively(int remainingCount, MonsterManager monsterManager, Transform spawnPoint)
     {
         if (remainingCount > 0)
         {
@@ -163,6 +165,26 @@ public class RoundManager : MonoBehaviour
         
         // Use saveFilePath instead of savePath
         File.WriteAllText(saveFilePath, jsonData);
+    }
+
+    public int GetCurrentRound()
+    {
+        return _currentRound;
+    }
+
+    public float GetDelayBeforeNextRound()
+    {
+        return _delayBeforeNextRound;
+    }
+
+    public int GetPreviousRoundValue()
+    {
+        return _previousRoundValue;
+    }
+
+    public int GetCurrentRoundValue()
+    {
+        return _currentRoundValue;
     }
     
 

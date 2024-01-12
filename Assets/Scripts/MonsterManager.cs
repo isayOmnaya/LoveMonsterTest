@@ -9,6 +9,9 @@ public class MonsterManager : MonoBehaviour
     List<Monster> activeMonsters = new List<Monster>();
 
     [SerializeField]
+    CameraSettings _cameraSettings = null;
+
+    [SerializeField]
     RoundManager _roundManager = null;
 
     [SerializeField]
@@ -24,24 +27,24 @@ public class MonsterManager : MonoBehaviour
 
 
 
-    
-
-
     public void Initialize(MonsterObjectPool monsterObjectPool)
     {
         _monsterPool = monsterObjectPool;
+        _cameraSettings.InitializeSpawnPoint(_spawnPoint); // can call in updateExternal too
     }
+
     public void UpdateExternal()
     {
         UpdateExternal(_monsterPool, _roundManager);
         _guiManager.UpdateMonsterCount(_monsterCount);
+         _cameraSettings.InitializeSpawnPoint(_spawnPoint);
     }
 
-    private void UpdateExternal(MonsterObjectPool monsterPool, RoundManager roundManager)
+    void UpdateExternal(MonsterObjectPool monsterPool, RoundManager roundManager)
     {
-        for (int i = 0; i < activeMonsters.Count; i++)
+        for(int i = 0; i < activeMonsters.Count; i++)
         {
-            if (activeMonsters[i].gameObject.activeSelf)
+            if(activeMonsters[i].gameObject.activeSelf)
             {
                 activeMonsters[i].UpdateExternal();
             }
@@ -69,5 +72,10 @@ public class MonsterManager : MonoBehaviour
     {
         activeMonsters.Add(monster);
         _monsterCount++;
+    }
+
+    public int GetMonsterCount()
+    {
+        return _monsterCount;
     }
 }

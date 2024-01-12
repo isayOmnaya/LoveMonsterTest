@@ -82,10 +82,10 @@ public class GuiManager : MonoBehaviour
 
             // Deserialize JSON data
             RoundDataList roundDataList = JsonUtility.FromJson<RoundDataList>(jsonData);
-
-            // Display each round's data on a new line
-            foreach (RoundData roundData in roundDataList.roundsData)
+            for(int i = 0; i < roundDataList.roundsData.Count; i++)
             {
+                RoundData roundData = roundDataList.roundsData[i];
+
                 string line = $"Round: {roundData.CurrentRound}, Duration: {roundData.RoundDuration:F2}, Monsters: {roundData.MonstersSpawned}";
                 RoundStatsText.text += line + "\n";
             }

@@ -49,14 +49,19 @@ public class Monster : MonoBehaviour
 
     public bool IsVisibleOnScreen()
     {
+        // Get the screen dimensions
         float screenWidth = Screen.width;
         float screenHeight = Screen.height;
 
-
+        // Get camera properties
         float cameraSize = Camera.main.orthographicSize;
-        float cameraAspect = Camera.main.aspect;
 
-       
+        // Adjust aspect ratio based on screen orientation
+        float cameraAspect = Screen.width > Screen.height
+            ? (float)Screen.width / Screen.height
+            : (float)Screen.height / Screen.width;
+
+        // Convert object's position to screen coordinates
         Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
 
         // Check if the screen position is within the visible area
