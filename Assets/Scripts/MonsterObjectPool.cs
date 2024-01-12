@@ -15,9 +15,9 @@ public class MonsterObjectPool : MonoBehaviour
     {
         if(_monsterList.Count > 0)
         {
-            for (int i = 0; i < _monsterList.Count; i++)
+            for(int i = 0; i < _monsterList.Count; i++)
             {
-                if (!_monsterList[i].activeInHierarchy)
+                if(!_monsterList[i].activeInHierarchy)
                 {
                     return _monsterList[i];
                 }
@@ -25,7 +25,6 @@ public class MonsterObjectPool : MonoBehaviour
         }
         if(_notEnoughMonsterInPool)
         {
-            //trippleSpread or normal bullet
             GameObject monster = Instantiate(MonsterPrefab, transform);
             monster.SetActive(false);
             _monsterList.Add(monster);

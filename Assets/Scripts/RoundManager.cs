@@ -133,7 +133,6 @@ public class RoundManager : MonoBehaviour
             Monster monsterPrefab = monster.GetComponent<Monster>();
             monsterPrefab.gameObject.transform.position = spawnPoint.position;
 
-            // Initialize the monster and subscribe to the OnDestroy event
             monsterPrefab.Initialize();
             monsterPrefab.gameObject.SetActive(true);
 

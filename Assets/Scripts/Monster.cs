@@ -10,6 +10,7 @@ public class Monster : MonoBehaviour
 
     [SerializeField]
     float _minVelocity = 0.0f;
+    
     float _velocity;
 
     [SerializeField]
@@ -28,12 +29,12 @@ public class Monster : MonoBehaviour
         CheckOutOfBounds();
     }
 
-    private void Move()
+    void Move()
     {
         transform.Translate(Vector2.right * _velocity * Time.deltaTime);
     }
 
-    private void CheckOutOfBounds()
+    void CheckOutOfBounds()
     {
         if(!IsVisibleOnScreen())
         {
@@ -53,7 +54,6 @@ public class Monster : MonoBehaviour
         float screenWidth = Screen.width;
         float screenHeight = Screen.height;
 
-        // Get camera properties
         float cameraSize = Camera.main.orthographicSize;
 
         // Adjust aspect ratio based on screen orientation

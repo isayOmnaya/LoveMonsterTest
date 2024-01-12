@@ -10,7 +10,7 @@ public class CameraSettings : MonoBehaviour
     
     public void InitializeSpawnPoint(Transform spawnPoint)
     {
-        if (spawnPoint != null)
+        if(spawnPoint != null)
         {
             Camera mainCamera = Camera.main;
 

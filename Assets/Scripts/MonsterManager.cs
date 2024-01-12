@@ -37,7 +37,7 @@ public class MonsterManager : MonoBehaviour
     {
         UpdateExternal(_monsterPool, _roundManager);
         _guiManager.UpdateMonsterCount(_monsterCount);
-         _cameraSettings.InitializeSpawnPoint(_spawnPoint);
+        _cameraSettings.InitializeSpawnPoint(_spawnPoint);
     }
 
     void UpdateExternal(MonsterObjectPool monsterPool, RoundManager roundManager)
